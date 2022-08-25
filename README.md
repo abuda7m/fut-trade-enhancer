@@ -4,7 +4,7 @@
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-[![Total Downloads](https://img.shields.io/github/downloads/chithakumar13/fut-trade-enhancer/total.svg)]()
+[![Total Downloads](https://img.shields.io/github/downloads/ckalgos/fut-trade-enhancer/total.svg)]()
 
 <p align="center"> 
   <h3 align="center">Fifa Trade Enhancer</h3>
@@ -13,9 +13,9 @@
     Fifa Trade Enhancer For Web App!
     <br />  
     <br /> 
-    <a href="https://github.com/chithakumar13/fut-trade-enhancer/issues">Report Bug</a>
+    <a href="https://github.com/ckalgos/fut-trade-enhancer/issues">Report Bug</a>
     ·
-    <a href="https://github.com/chithakumar13/fut-trade-enhancer/issues">Request Feature</a>
+    <a href="https://github.com/ckalgos/fut-trade-enhancer/issues">Request Feature</a>
   .
   <a href="https://www.youtube.com/channel/UC5eLkjmLU2TcE4oiJM9PsyA?sub_confirmation=1">Subscribe</a>
   
@@ -44,13 +44,14 @@
 <!-- installation -->
 
 ## Installation
+
 - Then navigate to [chrome store](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en-GB) to install Tamper monkey extension
-- Then navigate to [download page](https://github.com/chithakumar13/fut-trade-enhancer/releases/latest/download/fut-trade-enhancer.user.js) to install the script
+- Then navigate to [download page](https://github.com/ckalgos/fut-trade-enhancer/releases/latest/download/fut-trade-enhancer.user.js) to install the script
 
 Using mobile? No problem, you can get the app for your os below
 
-| Android | iOS |
-|:-:|:-:|
+|                                                           Android                                                            |                                                        iOS                                                         |
+| :--------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------: |
 | [<img src="storeImg/google-play-badge.png" height="50">](https://play.google.com/store/apps/details?id=com.fut.market.alert) | [<img src="storeImg/appstore-badge.png" height="50">](https://apps.apple.com/us/app/fut-market-alert/id1590505179) |
 
 ## Prerequisites
@@ -95,7 +96,7 @@ GIFS for some of the features
 ## Roadmap
 
 - This is a relatively new tool with limited features, any new ideas are welcomed
-  See the [open issues](https://github.com/chithakumar13/fut-trade-enhancer/issues) for a list of proposed features (and known issues).
+  See the [open issues](https://github.com/ckalgos/fut-trade-enhancer/issues) for a list of proposed features (and known issues).
 
 ## 💬 Community
 
@@ -127,17 +128,17 @@ Any contributions you make are **greatly appreciated**.
 
 ## Contact
 
-Instagram - [@Instagram](https://www.instagram.com/i_m_ck13/) - chithakumar13@gmail.com
+Instagram - [@Instagram](https://www.instagram.com/ckalgos/) - ckalgos@gmail.com
 
-Project Link: [https://github.com/chithakumar13/fut-trade-enhancer](https://github.com/chithakumar13/fut-trade-enhancer)
+Project Link: [https://github.com/ckalgos/fut-trade-enhancer](https://github.com/ckalgos/fut-trade-enhancer)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/chithakumar13/fut-trade-enhancer.svg?style=flat-square
-[contributors-url]: https://github.com/chithakumar13/fut-trade-enhancer/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/chithakumar13/fut-trade-enhancer.svg?style=flat-square
-[forks-url]: https://github.com/chithakumar13/fut-trade-enhancer/network/members
-[stars-shield]: https://img.shields.io/github/stars/chithakumar13/fut-trade-enhancer.svg?style=flat-square
-[stars-url]: https://github.com/chithakumar13/fut-trade-enhancer/stargazers
-[issues-shield]: https://img.shields.io/github/issues/chithakumar13/fut-trade-enhancer.svg?style=flat-square
-[issues-url]: https://github.com/chithakumar13/fut-trade-enhancer/issues
+[contributors-shield]: https://img.shields.io/github/contributors/ckalgos/fut-trade-enhancer.svg?style=flat-square
+[contributors-url]: https://github.com/ckalgos/fut-trade-enhancer/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/ckalgos/fut-trade-enhancer.svg?style=flat-square
+[forks-url]: https://github.com/ckalgos/fut-trade-enhancer/network/members
+[stars-shield]: https://img.shields.io/github/stars/ckalgos/fut-trade-enhancer.svg?style=flat-square
+[stars-url]: https://github.com/ckalgos/fut-trade-enhancer/stargazers
+[issues-shield]: https://img.shields.io/github/issues/ckalgos/fut-trade-enhancer.svg?style=flat-square
+[issues-url]: https://github.com/ckalgos/fut-trade-enhancer/issues

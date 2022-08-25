@@ -12,8 +12,8 @@ module.exports = {
     grant: ["GM_xmlhttpRequest", "GM_download"],
     connect: ["ea.com", "ea2.com", "futbin.com", "amazonaws.com", "futbin.org"],
     updateURL:
-      "https://github.com/chithakumar13/fut-trade-enhancer/releases/latest/download/fut-trade-enhancer.user.js",
+      "https://github.com/ckalgos/fut-trade-enhancer/releases/latest/download/fut-trade-enhancer.user.js",
     downloadURL:
-      "https://github.com/chithakumar13/fut-trade-enhancer/releases/latest/download/fut-trade-enhancer.user.js",
+      "https://github.com/ckalgos/fut-trade-enhancer/releases/latest/download/fut-trade-enhancer.user.js",
   },
 };
