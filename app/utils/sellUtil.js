@@ -1,34 +1,49 @@
 import { getValue } from "../services/repository";
-import { convertToSeconds, getRandWaitTime, wait, getRandNumberInRange } from "./commonUtil";
+import { convertToSeconds, getRandWaitTime, wait } from "./commonUtil";
+import { sendUINotification } from "./notificationUtil";
 import { getBuyBidPrice, getSellBidPrice, roundOffPrice } from "./priceUtil";
 
-export const listForPrice = async (sellPrice, player, futBinPercent) => {
-  sellPrice = parseInt(sellPrice.replace(/[,.]/g, ""));
+export const listForPrice = async (sellPrice, player, ignoreRoundOff) => {
   await getPriceLimits(player);
   if (sellPrice) {
-    futBinPercent = getRandNumberInRange(futBinPercent) || 100;
     const duration = getValue("EnhancerSettings")["idFutBinDuration"] || "1H";
-    let calculatedPrice = (sellPrice * futBinPercent) / 100;
     if (player.hasPriceLimits()) {
-      calculatedPrice = roundOffPrice(
-        Math.min(
-          player._itemPriceLimits.maximum,
-          Math.max(player._itemPriceLimits.minimum, calculatedPrice)
-        )
-      );
-
-      if (calculatedPrice === player._itemPriceLimits.minimum) {
-        calculatedPrice = getBuyBidPrice(calculatedPrice);
+      if (!ignoreRoundOff) {
+        sellPrice = computeSellPrice(sellPrice);
+      } else {
+        if (
+          sellPrice < player._itemPriceLimits.minimum ||
+          sellPrice > player._itemPriceLimits.maximum
+        ) {
+          sendUINotification(
+            "Given price is not in card's price range",
+            UINotificationType.NEGATIVE
+          );
+          return;
+        }
       }
     }
-    calculatedPrice = roundOffPrice(calculatedPrice, 200);
+    sellPrice = roundOffPrice(sellPrice, 200);
     services.Item.list(
       player,
-      getSellBidPrice(calculatedPrice),
-      calculatedPrice,
+      getSellBidPrice(sellPrice),
+      sellPrice,
       convertToSeconds(duration) || 3600
     );
     await wait(getRandWaitTime("3-8"));
+  }
+};
+
+const computeSellPrice = (sellPrice) => {
+  sellPrice = roundOffPrice(
+    Math.min(
+      player._itemPriceLimits.maximum,
+      Math.max(player._itemPriceLimits.minimum, sellPrice)
+    )
+  );
+
+  if (sellPrice === player._itemPriceLimits.minimum) {
+    sellPrice = getBuyBidPrice(sellPrice);
   }
 };
 

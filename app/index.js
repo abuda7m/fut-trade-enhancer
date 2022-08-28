@@ -1,4 +1,5 @@
 import { initOverrides } from "./function-overrides";
+import { initListeners } from "./services/externalRequest";
 import { setValue } from "./services/repository";
 import { getPlayers, getSettings } from "./utils/dbUtil";
 
@@ -22,6 +23,7 @@ const initScript = function () {
 
   if (isAllLoaded) {
     initOverrides();
+    isPhone() && initListeners();
   } else {
     setTimeout(initScript, 1000);
   }

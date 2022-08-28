@@ -6,8 +6,9 @@ const findSbcs = function (item) {
     );
   const url = `https://www.futbin.com/search?year=22&term=${name}`;
   return new Promise((resolve, reject) => {
-    GM_xmlhttpRequest({
+    sendExternalRequest({
       method: "GET",
+      identifier: `${Math.floor(+new Date())}_findSbcs`,
       url,
       onload: (res) => {
         if (res.status !== 200) {
@@ -48,9 +49,10 @@ const sbcLookup = new Map();
 
 const findAllSbcs = function (itemDetail) {
   return new Promise((resolve, reject) => {
-    GM_xmlhttpRequest({
+    sendExternalRequest({
       method: "GET",
       url: itemDetail.futBinUrl,
+      identifier: `${Math.floor(+new Date())}_findAllSbcs`,
       onload: (res) => {
         if (res.status === 200) {
           count++;

@@ -12,45 +12,23 @@ export const showPopUp = (options, title, message, selectCallBack) => {
 };
 
 export const popupOverride = () => {
+  const localizedDialog = utils.PopupManager.getLocalizedDialogOption;
+
   utils.PopupManager.getLocalizedDialogOption =
-    function getLocalizedDialogOption(e) {
-      var t = "";
-      switch (e) {
-        case enums.UIDialogOptions.RETRY:
-          t = "easfcdown.retry";
-          break;
-        case enums.UIDialogOptions.OK:
-          t = "common.dialog.ok";
-          break;
-        case enums.UIDialogOptions.CANCEL:
-          t = "common.dialog.cancel";
-          break;
-        case enums.UIDialogOptions.YES:
-          t = "popup.yes";
-          break;
-        case enums.UIDialogOptions.NO:
-          t = "popup.no";
-          break;
-        case enums.UIDialogOptions.SIGN_OUT:
-          t = "more.signout.button";
-          break;
-        case enums.UIDialogOptions.TAKE_ME:
-          t = "popup.takeMeThere";
-          break;
-        case enums.UIDialogOptions.ENABLE:
-          t = "common.dialog.enable";
-          break;
-        case enums.UIDialogOptions.DISABLE:
-          t = "common.dialog.disable";
-          break;
-        case atob("UGF5cGFs"):
-        case atob("WW91dHViZSBTdWJzY3JpcHRpb24="):
-        case atob("UGF0cmVvbg=="):
-        case atob("RGlzY29yZCAoQ29tbXVuaXR5KQ=="):
-        case atob("VHdpdHRlciAoRmFzdCBSZXNwb25zZSk="):
-        case atob("R2l0aHVi"):
-          return e;
+    function getLocalizedDialogOption(message) {
+      if (
+        [
+          atob("UGF5cGFs"),
+          atob("WW91dHViZSBTdWJzY3JpcHRpb24="),
+          atob("UGF0cmVvbg=="),
+          atob("RGlzY29yZCAoQ29tbXVuaXR5KQ=="),
+          atob("VHdpdHRlciAoRmFzdCBSZXNwb25zZSk="),
+          atob("R2l0aHVi"),
+        ].includes(message)
+      ) {
+        return message;
       }
-      return services.Localization.localize(t);
+
+      return localizedDialog(message);
     };
 };

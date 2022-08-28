@@ -1,5 +1,5 @@
-import { setValue } from "../services/repository";
 import { getSquadPlayerIds } from "../services/club";
+import { setValue } from "../services/repository";
 
 export const transferHubOverride = () => {
   const transferTile =
@@ -9,7 +9,7 @@ export const transferHubOverride = () => {
     function () {
       transferTile.call(this);
       getSquadPlayerIds().then((memberIds) => {
-        setValue("SquadMemberIds", memberIds);
+        setValue("squadMemberIds", memberIds);
       });
     };
 };

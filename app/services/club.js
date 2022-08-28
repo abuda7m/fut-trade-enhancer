@@ -5,17 +5,16 @@ import {
   hideLoader,
   showLoader,
 } from "../utils/commonUtil";
-import { getConceptPlayers } from "../services/conceptplayer";
 import { MAX_CLUB_SEARCH } from "../app.constants";
-import { addFutbinCachePrice } from "../utils/futbinUtil";
 import { getValue } from "./repository";
+import { fetchPrices } from "./futbin";
 
 export const getSquadPlayerIds = () => {
   return new Promise((resolve, reject) => {
     const squadPlayerIds = new Set();
     getAllClubPlayers(true).then((squadMembers) => {
       squadMembers.forEach((member) => {
-        if (member.loans < 0) squadPlayerIds.add(member.definitionId);
+        squadPlayerIds.add(member.definitionId);
       });
       resolve(squadPlayerIds);
     });
@@ -27,8 +26,7 @@ export const getSquadPlayerLookup = () => {
     const squadPlayersLookup = new Map();
     getAllClubPlayers(true).then((squadMembers) => {
       squadMembers.forEach((member) => {
-        if (member.loans < 0)
-          squadPlayersLookup.set(member.definitionId, member);
+        squadPlayersLookup.set(member.definitionId, member);
       });
       resolve(squadPlayersLookup);
     });
@@ -67,26 +65,6 @@ export const getAllClubPlayers = function (filterLoaned, playerId) {
   });
 };
 
-export const getPlayersForSbc = async (playerIds) => {
-  const players = {};
-  await getAllClubPlayers(true); // Load All Players once to avoid individual network calls
-  for (const playerId in playerIds) {
-    const parsedPlayerId = parseInt(playerId, 10);
-    let playerInfo = (await getAllClubPlayers(true, parsedPlayerId)).find(
-      (player) => player.definitionId === parsedPlayerId
-    );
-    if (!playerInfo) {
-      await wait(1);
-      playerInfo = (await getConceptPlayers(parsedPlayerId)).find(
-        (player) => player.definitionId === parsedPlayerId
-      );
-    }
-    players[playerId] = playerInfo;
-    await wait(1.5);
-  }
-  return players;
-};
-
 const getClubSquad = (searchCriteria) => {
   return services.Item.searchClub(searchCriteria);
 };
@@ -96,7 +74,7 @@ const downloadClub = async () => {
   let squadMembers = await getAllClubPlayers();
   squadMembers = squadMembers.sort((a, b) => b.rating - a.rating);
 
-  await addFutbinCachePrice(squadMembers);
+  await fetchPrices(squadMembers);
 
   let csvContent = "";
   const headers =
@@ -148,7 +126,7 @@ const downloadClub = async () => {
     }
     const existingValue = getValue(squadMember.definitionId);
     if (existingValue && existingValue.price) {
-      rowRecord += existingValue.price.replace(/[,.]/g, "") + ",";
+      rowRecord += existingValue.price + ",";
     } else {
       rowRecord += "--NA--,";
     }

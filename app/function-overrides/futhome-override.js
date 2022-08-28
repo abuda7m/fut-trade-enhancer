@@ -8,7 +8,9 @@ const getScriptMessages = () => {
   const messages = [];
 
   const message1 = formMessage(
-    atob("VGhhbmtzIGZvciBpbnN0YWxsaW5nIHRoZSBzY3JpcHQ="),
+    atob(
+      "TG9va2luZyBmb3IgaGVscCwgQ2xpY2sgdG8gam9pbiBvdXIgRGlzY29yZCBzZXJ2ZXI="
+    ),
     atob(
       "VGhpcyBpcyBhIGZyZWUgdG8gdXNlIHNjcmlwdCAhISEsIGdldCB5b3VyIG1vbmV5IGJhY2sgaWYgc29tZW9uZSBzb2xkIGl0IHRvIHlvdQ=="
     ),
@@ -17,9 +19,9 @@ const getScriptMessages = () => {
   );
 
   const message2 = formMessage(
-    atob("RW5qb3lpbmcgdGhlIHNjcmlwdCwgY2xpY2sgdG8gZG9uYXRl"),
+    atob("Q2xpY2sgdG8gYmVjb21lIGEgRG9uYXRvciBub3chISE"),
     atob(
-      "Q29uc2lkZXIgYSBkb25hdGlvbiB0byBzdXBwb3J0IGZ1dHVyZSBlbmhhbmNlbWVudHM="
+      "QmVjb21lIGEgZG9uYXRvciwgdG8gZ2V0IHByb2ZpdGFibGUgZmlsdGVycyBhbmQgdHJhZGluZyB0aXBz"
     ),
     imageLogos,
     atob("c3VwcG9ydGh1Yg==")
@@ -43,19 +45,17 @@ const clickOption = () => {
     (t) => {
       if (t === atob("UGF5cGFs")) {
         window.open(
-          atob("aHR0cHM6Ly93d3cucGF5cGFsLmNvbS9wYXlwYWxtZS9ja2FsZ29z"),
+          atob("aHR0cHM6Ly91cGdyYWRlLmNoYXQvY2thbGdvcw=="),
           atob("X2JsYW5r")
         );
       } else if (t === atob("WW91dHViZSBTdWJzY3JpcHRpb24=")) {
         window.open(
-          atob(
-            "aHR0cHM6Ly93d3cueW91dHViZS5jb20vY2hhbm5lbC9VQzVlTGtqbUxVMlRjRTRvaUpNOVBzeUE/c3ViX2NvbmZpcm1hdGlvbj0x"
-          ),
+          atob("aHR0cHM6Ly95b3V0dWJlLmNvbS9ja2FsZ29zL2pvaW4="),
           atob("X2JsYW5r")
         );
       } else if (t === atob("UGF0cmVvbg==")) {
         window.open(
-          atob("aHR0cHM6Ly93d3cucGF0cmVvbi5jb20vaV9tX2NrMTM="),
+          atob("aHR0cHM6Ly93d3cucGF0cmVvbi5jb20vY2thbGdvcw=="),
           atob("X2JsYW5r")
         );
       }
@@ -65,6 +65,8 @@ const clickOption = () => {
 
 export const futHomeOverride = () => {
   const homeHubInit = UTHomeHubView.prototype.init;
+  const generate = UTHomeHubView.prototype._generate;
+  const renderHubMessagesTile = UTHomeHubView.prototype.renderHubMessagesTile;
 
   UTHomeHubView.prototype.init = function () {
     homeHubInit.call(this);
@@ -113,93 +115,19 @@ export const futHomeOverride = () => {
     }
   };
 
-  UTHomeHubView.prototype.renderHubMessagesTile = function (e) {
-    this._hubMessagesTile.setData(e);
+  UTHomeHubView.prototype.renderHubMessagesTile = function (...args) {
+    renderHubMessagesTile.call(this, ...args);
     this._scriptMessageTile.setData(getScriptMessages());
   };
 
-  UTHomeHubView.prototype._generate = function generate() {
+  UTHomeHubView.prototype._generate = function () {
     if (!this._generated) {
-      var e = document.createElement("div"),
-        t = document.createElement("div");
-      t.classList.add("grid"),
-        t.classList.add("layout-hub"),
-        (this._scriptMessageTile = new MessageTileView()),
-        this._scriptMessageTile.getRootElement().classList.add("col-1-1"),
-        t.appendChild(this._scriptMessageTile.getRootElement()),
-        (this._unassignedTile = new UTUnassignedTileView()),
-        this._unassignedTile.getRootElement().classList.add("col-1-1"),
-        t.appendChild(this._unassignedTile.getRootElement()),
-        (this._futChampionsTile = new UTChampionsTileView()),
-        this._futChampionsTile.getRootElement().classList.add("col-1-1"),
-        t.appendChild(this._futChampionsTile.getRootElement()),
-        (this._squadBattlesTile = new UTSquadBattlesTileView()),
-        this._squadBattlesTile.getRootElement().classList.add("col-1-1"),
-        t.appendChild(this._squadBattlesTile.getRootElement()),
-        (this._futRivalsTile = new UTRivalsTileView()),
-        this._futRivalsTile.getRootElement().classList.add("col-1-1"),
-        t.appendChild(this._futRivalsTile.getRootElement()),
-        (this._playerPicksTile = new UTPlayerPicksTileView()),
-        this._playerPicksTile.getRootElement().classList.add("col-1-1"),
-        t.appendChild(this._playerPicksTile.getRootElement()),
-        (this._objectivesTile = new UTObjectivesHubTileView()),
-        this._objectivesTile
-          .getRootElement()
-          .classList.add("ut-tile-view--with-gfx"),
-        this._objectivesTile.getRootElement().classList.add("col-1-2"),
-        this._objectivesTile
-          .getRootElement()
-          .classList.add("ut-tile-hub-objective"),
-        t.appendChild(this._objectivesTile.getRootElement()),
-        (this._sbcTile = new UTGraphicalInfoTileView()),
-        this._sbcTile.getRootElement().classList.add("ut-tile-view--with-gfx"),
-        this._sbcTile.getRootElement().classList.add("col-1-2"),
-        this._sbcTile.getRootElement().classList.add("ut-tile-hub-sbc"),
-        t.appendChild(this._sbcTile.getRootElement()),
-        (this._hubMessagesTile = new UTHubMessagesTileView()),
-        this._hubMessagesTile.getRootElement().classList.add("col-1-1"),
-        t.appendChild(this._hubMessagesTile.getRootElement()),
-        (this._transferListTile = new UTTransfersTileView()),
-        this._transferListTile.getRootElement().classList.add("col-1-2"),
-        this._transferListTile
-          .getRootElement()
-          .classList.add("ut-tile-transfer-list"),
-        t.appendChild(this._transferListTile.getRootElement()),
-        (this._customizeTile = new UTGraphicalInfoTileView()),
-        this._customizeTile
-          .getRootElement()
-          .classList.add("ut-tile-view--with-gfx"),
-        this._customizeTile.getRootElement().classList.add("col-1-2"),
-        this._customizeTile
-          .getRootElement()
-          .classList.add("ut-tile-hub-customize"),
-        t.appendChild(this._customizeTile.getRootElement()),
-        (this._activeSquadTile = new UTSquadTileView()),
-        this._activeSquadTile.getRootElement().classList.add("col-1-1"),
-        t.appendChild(this._activeSquadTile.getRootElement()),
-        (this._cgeTile = new UTGraphicalInfoTileView()),
-        this._cgeTile.getRootElement().classList.add("ut-tile-view--with-gfx"),
-        this._cgeTile.getRootElement().classList.add("ut-tile-hub-cge"),
-        this._cgeTile.getRootElement().classList.add("col-1-2"),
-        t.appendChild(this._cgeTile.getRootElement()),
-        (this._proClubsTile = new UTGraphicalInfoTileView()),
-        this._proClubsTile
-          .getRootElement()
-          .classList.add("ut-tile-view--with-gfx"),
-        this._proClubsTile
-          .getRootElement()
-          .classList.add("ut-tile-hub-proclubs"),
-        this._proClubsTile.getRootElement().classList.add("col-1-2"),
-        t.appendChild(this._proClubsTile.getRootElement()),
-        (this._leaderboardsTile = new UTLeaderboardsTileView()),
-        this._leaderboardsTile.getRootElement().classList.add("col-1-1"),
-        t.appendChild(this._leaderboardsTile.getRootElement()),
-        (this._weekendLeagueProgress = new UTWeekendLeagueProgressView()),
-        this._weekendLeagueProgress.getRootElement().classList.add("col-1-1"),
-        t.appendChild(this._weekendLeagueProgress.getRootElement()),
-        e.appendChild(t),
-        (this.__root = e),
-        (this._generated = !0);
+      generate.call(this);
+      this._scriptMessageTile = new MessageTileView(this);
+      this._scriptMessageTile.getRootElement().classList.add("col-1-1");
+      setTimeout(() => {
+        $(".layout-hub")[0].prepend(this._scriptMessageTile.getRootElement());
+      });
     }
   };
 };

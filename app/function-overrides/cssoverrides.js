@@ -241,7 +241,7 @@ export const overrideStyle = () => {
     }
     .price-totals {
       border-top: 1px solid #4ee6eb;
-      display: none;
+      display: flex;
       justify-content: flex-end;
       height: 35px;
       align-items: center;
@@ -277,6 +277,9 @@ export const overrideStyle = () => {
       display: flex;
       justify-content: center;
       align-items: center;
+    }
+    .relist {
+      margin-left: 10px;
     }
     `;
   document.head.appendChild(style);
