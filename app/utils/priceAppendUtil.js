@@ -12,7 +12,7 @@ import {
   appendSquadTotal,
 } from "./uiUtils/appendItems";
 
-export const appendCardPrice = async (listRows, appendPackPrice) => {
+export const appendCardPrice = async (listRows, isFromPacks) => {
   if (!listRows.length) {
     return;
   }
@@ -47,7 +47,7 @@ export const appendCardPrice = async (listRows, appendPackPrice) => {
     totalExternalPrice += cardPrice || 0;
     appendPrice("FutBin", auctionElement, cardPrice);
   }
-  appendPackPrice && appendPackPrice(totalExternalPrice);
+  isFromPacks && appendPackPrice(totalExternalPrice);
   return { totalBid, totalBin, totalExternalPrice };
 };
 

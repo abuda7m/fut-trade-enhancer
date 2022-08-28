@@ -106,12 +106,25 @@ const fetchAndAppendCommunitySbcs = async (challengeId) => {
   );
 };
 
-const buyPlayersPopUp = () => {
-  const { _squad } = getAppMain()
+const getControllerInstance = () => {
+  if (isPhone()) {
+    const childViews = getAppMain()
+      .getRootViewController()
+      .getPresentedViewController()
+      .getCurrentViewController()._childViewControllers;
+
+    return childViews[childViews.length - 2];
+  }
+
+  return getAppMain()
     .getRootViewController()
     .getPresentedViewController()
     .getCurrentViewController()
     .getCurrentController()._leftController;
+};
+
+const buyPlayersPopUp = () => {
+  const { _squad } = getControllerInstance();
 
   const sbcPlayers = _squad.getFieldPlayers();
   const conceptPlayers = sbcPlayers.filter(({ _item }) => _item.concept);
@@ -130,7 +143,8 @@ const buyPlayersPopUp = () => {
   <select  multiple="multiple" class="sbc-players-list" id="${idSBCPlayersToBuy}"
       style="overflow-y : scroll">
       ${playerNames.map(
-        (value) => `<option value='${value}'>${value}</option>`
+        (value) =>
+          `<option selected='true' disabled value='${value}'>${value}</option>`
       )}
    </select> 
    <br />
@@ -303,11 +317,7 @@ const fillSquad = async (squadId) => {
     return playerEntity;
   });
 
-  const { _squad, _challenge } = getAppMain()
-    .getRootViewController()
-    .getPresentedViewController()
-    .getCurrentViewController()
-    .getCurrentController()._leftController;
+  const { _squad, _challenge } = getControllerInstance();
 
   _squad.setPlayers(squadPlayers, true);
 

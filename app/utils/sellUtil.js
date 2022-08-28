@@ -9,17 +9,13 @@ export const listForPrice = async (sellPrice, player, ignoreRoundOff) => {
     const duration = getValue("EnhancerSettings")["idFutBinDuration"] || "1H";
     if (player.hasPriceLimits()) {
       if (!ignoreRoundOff) {
-        sellPrice = computeSellPrice(sellPrice);
+        sellPrice = computeSellPrice(sellPrice, player);
       } else {
         if (
           sellPrice < player._itemPriceLimits.minimum ||
           sellPrice > player._itemPriceLimits.maximum
         ) {
-          sendUINotification(
-            "Given price is not in card's price range",
-            UINotificationType.NEGATIVE
-          );
-          return;
+          return false;
         }
       }
     }
@@ -32,9 +28,10 @@ export const listForPrice = async (sellPrice, player, ignoreRoundOff) => {
     );
     await wait(getRandWaitTime("3-8"));
   }
+  return true;
 };
 
-const computeSellPrice = (sellPrice) => {
+const computeSellPrice = (sellPrice, player) => {
   sellPrice = roundOffPrice(
     Math.min(
       player._itemPriceLimits.maximum,
@@ -45,6 +42,7 @@ const computeSellPrice = (sellPrice) => {
   if (sellPrice === player._itemPriceLimits.minimum) {
     sellPrice = getBuyBidPrice(sellPrice);
   }
+  return sellPrice;
 };
 
 const getPriceLimits = async (player) => {

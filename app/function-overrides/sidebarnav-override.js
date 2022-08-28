@@ -15,7 +15,7 @@ const generateEnhancerTab = () => {
   const enhancerTab = new UTTabBarItemView();
   enhancerTab.init();
   enhancerTab.setTag(6);
-  enhancerTab.setText("Enhancer Settings");
+  enhancerTab.setText("Enhancer");
   enhancerTab.addClass("icon-transfer");
   return enhancerTab;
 };

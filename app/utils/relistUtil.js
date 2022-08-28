@@ -108,7 +108,7 @@ export const listCards = async (cards, price) => {
 
 const listCardsForFixedPrice = async (cards, price) => {
   for (const card of cards) {
-    await listForPrice(price, card, true);
+    await listCard(price, card, true);
   }
 };
 
@@ -118,7 +118,7 @@ const listCardsForFutBIN = async (cards) => {
   for (const card of cards) {
     const existingValue = getValue(card.definitionId);
     if (existingValue && existingValue.price) {
-      await listForPrice(computeSalePrice(existingValue.price), card);
+      await listCard(computeSalePrice(existingValue.price), card);
     } else {
       sendUINotification(
         `Price missing for ${card._staticData.name}`,
@@ -126,6 +126,17 @@ const listCardsForFutBIN = async (cards) => {
       );
     }
   }
+};
+
+const listCard = async (price, card, isFixedPrice) => {
+  const isListed = await listForPrice(price, card, isFixedPrice);
+  if (!isListed) {
+    return sendUINotification(
+      "Given price is not in card's price range",
+      UINotificationType.NEGATIVE
+    );
+  }
+  sendUINotification(`Listed ${card._staticData.name} for ${price}`);
 };
 
 const computeSalePrice = (cardPrice) => {

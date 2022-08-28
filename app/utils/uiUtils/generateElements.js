@@ -1,13 +1,11 @@
-import { idListFutBin, idViewFutBin } from "../../app.constants";
 import { getFutbinPlayerUrl } from "../../services/futbin";
 import { getValue } from "../../services/repository";
+import { createButton } from "../../view/ButtonView";
 import { sendUINotification } from "../notificationUtil";
 import { listCards } from "../reListUtil";
-import { generateButton } from "./generateButton";
 
 export const generateListForFutBinBtn = () => {
-  return generateButton(
-    idListFutBin,
+  return createButton(
     "List for FUTBIN",
     () => {
       const selectedPlayer = getValue("selectedPlayer");
@@ -18,8 +16,7 @@ export const generateListForFutBinBtn = () => {
 };
 
 export const generateViewOnFutBinBtn = () => {
-  return generateButton(
-    idViewFutBin,
+  return createButton(
     "View on FUTBIN",
     async () => {
       const selectedPlayer = getValue("selectedPlayer");
@@ -36,15 +33,10 @@ export const generateViewOnFutBinBtn = () => {
   );
 };
 
-export const generateSectionRelistBtn = (
-  sectionHeader,
-  callBack,
-  dataSource
-) => {
-  return generateButton(
-    `${sectionHeader}${dataSource}`.replace(/\s/g, ""),
+export const generateSectionRelistBtn = (callBack, dataSource) => {
+  return createButton(
     `List ${dataSource}`,
     callBack,
-    "relist call-to-action mini "
+    "relist call-to-action mini"
   );
 };

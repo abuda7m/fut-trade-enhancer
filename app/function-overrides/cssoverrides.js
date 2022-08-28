@@ -128,7 +128,11 @@ export const overrideStyle = () => {
     } 
     .phone .settings-field  {
       width: 100% !important;
-      padding: 0px 10px;;
+      padding: 0px 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
     }
     .settings-field .ut-toggle-cell-view {
       justify-content: space-between;
@@ -220,6 +224,10 @@ export const overrideStyle = () => {
     .settings-field .info{
       text-align: center;
     }
+    .phone .settings-field .info,
+    .phone .settings-field .buttonInfo{ 
+      width:85%
+    }
     input[type="number"]{
       padding: 0 .5em;
       border-radius: 0;
@@ -266,6 +274,9 @@ export const overrideStyle = () => {
     .packOpen {
       margin-left: 0.5rem;
       flex-basis: 50% !important;
+    }
+    .phone .packOpen {
+      flex-basis: 100% !important;
     }
     .squad-fut-bin {
       display: flex;

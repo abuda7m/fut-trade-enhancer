@@ -1,5 +1,4 @@
 import { idSectionPrices } from "../../app.constants";
-import { createElementFromHTML } from "../commonUtil";
 import { generateSectionRelistBtn } from "./generateElements";
 
 export const appendPrice = (dataSource, auctionElement, price) => {
@@ -70,15 +69,9 @@ export const appendRelistExternal = (
 ) => {
   if (!rootElement.find(".relist").length) {
     rootElement.append(
-      createElementFromHTML(
-        generateSectionRelistBtn(header, externalCallBack, dataSource)
-      )
+      generateSectionRelistBtn(externalCallBack, dataSource).__root
     );
-    rootElement.append(
-      createElementFromHTML(
-        generateSectionRelistBtn(header, fixedCallBack, "Fixed")
-      )
-    );
+    rootElement.append(generateSectionRelistBtn(fixedCallBack, "Fixed").__root);
   }
 };
 

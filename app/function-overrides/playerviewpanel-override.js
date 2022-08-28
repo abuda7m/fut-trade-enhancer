@@ -1,4 +1,3 @@
-import { createElementFromHTML } from "../utils/commonUtil";
 import { idViewFutBin } from "../app.constants";
 import { setValue } from "../services/repository";
 
@@ -29,18 +28,18 @@ export const playerViewPanelOverride = () => {
 
   UTQuickListPanelView.prototype.initFutBinEvent = function (e) {
     if (e.type !== "player") {
-      $(this._futbinListFor).css("display", "none");
+      $(this._futbinListFor.__root).css("display", "none");
       return;
     }
-    $(this._futbinListFor).css("display", "");
+    $(this._futbinListFor.__root).css("display", "");
     setValue("selectedPlayer", e);
   };
 
   UTQuickListPanelView.prototype._generate = function (...args) {
     if (!this._generated) {
       quickListPanelGenerate.call(this, ...args);
-      this._futbinListFor = createElementFromHTML(generateListForFutBinBtn());
-      this.__root.children[0].appendChild(this._futbinListFor);
+      this._futbinListFor = generateListForFutBinBtn();
+      this.__root.children[0].appendChild(this._futbinListFor.__root);
     }
   };
 
@@ -58,8 +57,8 @@ export const playerViewPanelOverride = () => {
         const binInput = binControl.find(".numericInput");
         const panelDisplayStyle = $(".more").css("display");
         if ($(".more").length) {
-          if (!$(`#${idViewFutBin}`).length) {
-            $(generateViewOnFutBinBtn())
+          if (!$('button:contains("View on FUTBIN")').length) {
+            $(generateViewOnFutBinBtn().__root)
               .css("display", panelDisplayStyle)
               .insertAfter($(".more"));
           }
